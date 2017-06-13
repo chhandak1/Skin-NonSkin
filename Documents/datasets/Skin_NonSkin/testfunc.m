@@ -1,7 +1,7 @@
 function [g2test,h,success]=testfunc(theta1,theta2,xtest,ytest)
 
-g1=sigmoid(xtest*theta1);
-g2test=sigmoid(g1*theta2);
+g1=tansig(xtest*theta1);
+g2test=tansig(g1*theta2);
 
 h=ones(size(g2test));
 count=0;

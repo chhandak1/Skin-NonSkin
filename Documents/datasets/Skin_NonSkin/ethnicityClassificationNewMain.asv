@@ -1,7 +1,4 @@
 %function ethnicityClassificationNewMain(final)
-clc 
-clear all
-close all
 X=load('CaucasianNonCaucasianData.txt');
 n=size(X,2);
 m=size(X,1);%m=size(x,1);
@@ -11,7 +8,7 @@ x = [ones(size(x,1),1) x];   %Adding Bias value
 y=X(:,n);   
 %pos1=find(y==1);
 %y(pos1)=0;
-pos2=find(y==0);
+pos2=find(y==2);
 y(pos2)=-1;
 
 n=size(x,2);
@@ -34,12 +31,12 @@ for i=1:outIters
         [g1,g2]=feedforward(xtrain,ethnicityTheta1,ethnicityTheta2);
         [ethnicityTheta1,ethnicityTheta2]=backpropagation(g1,g2,ethnicityTheta1,ethnicityTheta2,xtrain,ytrain);
         error(i)=sum((ytrain-g2).^2); %Mean Square Error Calculation
-       
+        [g2test,h,success]=testfunc(ethnicityTheta1,ethnicityTheta2,xtest,ytest);
     end
     
     figure,plot(error);
     
-    [g2test,h,success]=testfunc(ethnicityTheta1,ethnicityTheta2,xtest,ytest);
+    
     sumSuccess=sumSuccess+success;
     if(success>max)
         max=success;
