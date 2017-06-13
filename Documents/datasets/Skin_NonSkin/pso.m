@@ -11,27 +11,28 @@
 % Contact Info: sm.kalami@gmail.com, info@yarpiz.com
 %
 
-clc;
-clear;
-close all;
+%clc;
+%clear;
+%close all;
 
 %% Problem Definition
+function GlobalBest=pso(thetaPso,xtrain,ytrain)
 
-CostFunction=@(x) Sphere(x);        % Cost Function
+CostFunction=@(thetaPso) MSECost(thetaPso,xtrain,ytrain);        % Cost Function
 %CostFunction=@(x) sum(x.^2);
-nVar=26;            % Number of Decision Variables
+nVar=20;            % Number of Decision Variables
 
 VarSize=[1 nVar];   % Size of Decision Variables Matrix
 
-VarMin=0;         % Lower Bound of Variables
-VarMax=255;         % Upper Bound of Variables
+VarMin=-1;         % Lower Bound of Variables
+VarMax=1;         % Upper Bound of Variables
 
 
 %% PSO Parameters
 
-MaxIt=200;      % Maximum Number of Iterations
+MaxIt=400;      % Maximum Number of Iterations
 
-nPop=100;        % Population Size (Swarm Size)
+nPop=20;        % Population Size (Swarm Size)
 
 % PSO Parameters
 w=1;            % Inertia Weight
@@ -67,7 +68,8 @@ empty_particle.Best.Cost=[];
 particle=repmat(empty_particle,nPop,1);
 
 GlobalBest.Cost=inf;
-
+global errorPSO;
+errorPSO=zeros(size(MaxIt));
 for i=1:nPop
     
     % Initialize Position
@@ -141,8 +143,8 @@ for it=1:MaxIt
     end
     
     BestCost(it)=GlobalBest.Cost;
-    
-    disp(['Iteration ' num2str(it) ': Best Cost = ' num2str(BestCost(it))]);
+    errorPSO(it)=BestCost(it);
+    %disp(['Iteration ' num2str(it) ': Best Cost = ' num2str(BestCost(it))]);
     
     w=w*wdamp;
     

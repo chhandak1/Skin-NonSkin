@@ -1,5 +1,5 @@
 function final=check(theta1,theta2)
-data=imread('skinCheck11.jpg');
+data=imread('skinCheck5.jpg');
 figure,imshow(data);
 final=zeros(size(data));
 for i=1:size(data,1)
@@ -12,15 +12,13 @@ for i=1:size(data,1)
         xtest=double([1 b g r]);
         g1=sigmoid(double(xtest*theta1));
         g2=sigmoid(g1*theta2);
-        if g2>0.5
-            final(i,j,:)=1;
-            %{
-            final(i,j,1)=r;
-            final(i,j,2)=g;
-            final(i,j,3)=b;
-            %}
-        else
+        if g2>0.13
             final(i,j,:)=0;
+        else
+            %final(i,j,1)=r;
+            %final(i,j,2)=g;
+            %final(i,j,3)=b;
+            final(i,j,:)=1;
         end
     end
 end

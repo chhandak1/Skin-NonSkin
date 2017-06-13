@@ -12,7 +12,7 @@ for i=1:size(data,1)
             xtest=double([1 r g b]);
             g1=sigmoid(double(xtest*theta1));
             g2=sigmoid(g1*theta2);
-            if g2>0.5
+            if g2>0
                 ethnicity(i,j,:)=1;
                 %{
                 final(i,j,1)=r;

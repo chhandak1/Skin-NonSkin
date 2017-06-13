@@ -6,7 +6,7 @@ clc
 FDetect = vision.CascadeObjectDetector;
 
 %Read the input image
-I = imread('skinCheck9.jpg');
+I = imread('skinCheck12.jpg');
 
 %Returns Bounding Box values based on number of objects
 BB = step(FDetect,I);

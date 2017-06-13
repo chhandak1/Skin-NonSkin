@@ -1,4 +1,4 @@
-function ethnicityClassificationNewMain(final)
+%function ethnicityClassificationNewMain(final)
 X=load('CaucasianNonCaucasianData.txt');
 n=size(X,2);
 m=size(X,1);%m=size(x,1);
@@ -8,20 +8,20 @@ x = [ones(size(x,1),1) x];   %Adding Bias value
 y=X(:,n);   
 %pos1=find(y==1);
 %y(pos1)=0;
-%pos2=find(y==2);
-%y(pos2)=1;
+pos2=find(y==2);
+y(pos2)=-1;
 
 n=size(x,2);
-[xtrain,ytrain,xtest,ytest]=trainTest(x,y,m,n);
+[xtrain,ytrain,xtest,ytest]=trainTestBP(x,y,m,n);
 m=size(xtrain,1);
 neurons=5;
-outIters=2;
+outIters=4;
 sumSuccess=0;
 max=0;
 for i=1:outIters
     ethnicityTheta1=-1+2*rand(n,neurons);
     ethnicityTheta2=-1+2*rand(neurons,1);
-    inIters=6000;
+    inIters=20000;
     error=zeros(inIters,1);
     g1=zeros(size(xtrain,1),neurons);
     g2=zeros(neurons,1);
@@ -35,8 +35,8 @@ for i=1:outIters
     end
     
     figure,plot(error);
-    [g2test,h,success]=testfunc(ethnicityTheta1,ethnicityTheta2,xtest,ytest);
-    ethnicity=checkEthnicity(final,ethnicityTheta1,ethnicityTheta2);
+    
+    
     sumSuccess=sumSuccess+success;
     if(success>max)
         max=success;
@@ -45,6 +45,8 @@ for i=1:outIters
         plot(error);
         hold on;
     end
+    [g2test,h,success]=testfunc(ethnicityTheta1_final,ethnicityTheta2_final,xtest,ytest);
+    %ethnicity=checkEthnicity(final,ethnicityTheta1_final,ethnicityTheta2_final);
 end
 %grayscaleImg=check(ethnicityTheta1,ethnicityTheta2);
 %avgSuccess=sumSuccess/outIters;

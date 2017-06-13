@@ -10,7 +10,7 @@ for i=1:size(data,1)
         xtest=double([1 b g r]);
         g1=sigmoid(double(xtest*theta1));
         g2=sigmoid(g1*theta2);
-        if g2>0.5
+        if g2>0.10
             final(i,j,:)=0;
             %{
             final(i,j,1)=r;
