@@ -1,7 +1,6 @@
-%Just run this file for PSO
 clc 
 clear all
-thetaPso=-1+2*rand(20,1);
+thetaPso=-1+2*rand(1940,1);
 
 
 %thetaPso1=reshape(thetaPso(1:20),[4,5]);
@@ -16,7 +15,7 @@ m=size(X,1);
 n=size(X,2);
 [xtrain,ytrain,xtest,ytest]=trainTest(x,y,m,n);
 
-GlobalBest=pso(thetaPso,xtrain,ytrain);
+[GlobalBest,errorPSO]=pso(thetaPso,xtrain,ytrain);
 %g1=sigmoid(double(xtest*thetaPso1));
 %g1 = [ones(size(g1,1),1) g1];
 %g2=sigmoid(g1*thetaPso2);

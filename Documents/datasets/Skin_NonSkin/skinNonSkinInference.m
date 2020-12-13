@@ -1,5 +1,6 @@
 function skinNonSkinInference(data,theta1,theta2)
 final=zeros(size(data));
+finalImg=zeros(size(data,1),size(data,2),3);
 for i=1:size(data,1)
     for j=1:size(data,2)
        
@@ -10,12 +11,13 @@ for i=1:size(data,1)
         xtest=double([1 b g r]);
         g1=sigmoid(double(xtest*theta1));
         g2=sigmoid(g1*theta2);
-        if g2>0.10
+        if g2>0.92
             final(i,j,:)=0;
             %{
-            final(i,j,1)=r;
-            final(i,j,2)=g;
-            final(i,j,3)=b;
+            finalImg(i,j,1)=r;
+            finalImg(i,j,2)=g;
+            finalImg(i,j,3)=b;
+            
             %}
         else
             final(i,j,:)=1;
@@ -24,4 +26,4 @@ for i=1:size(data,1)
 end
 segmentedImg=final;
 figure,imshow(segmentedImg);
-%ethnicityInference(final,data);
+checkEthnicity(final,data);

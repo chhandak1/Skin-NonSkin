@@ -5,7 +5,7 @@
 
 
 
-function [galaxy_x,best_cost]=nmgso(fname,ndims)
+function [galaxy_x,best_cost,errorGSO]=nmgso(fname,ndims)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,9 +15,9 @@ f=fname;
 
 %--D--%%----EPmax-----%%----L1-------%%-----L2------%%---N---%%---M--%%
 dim=ndims;
-epochnumber=10;
-Iteration1=200;
-Iteration2=500;
+epochnumber=50;
+Iteration1=100;
+Iteration2=30;
 PopSize=5;
 subpop=20;
 
@@ -88,7 +88,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         %Initialization of counter for function calls
-
+errorGSO=zeros(100,1);
 
 for epoch=1:epochnumber
     
@@ -187,8 +187,10 @@ for epoch=1:epochnumber
         end
         
     end
-    
-    
+    errorGSO(epoch) = galaxy_c;
+    %if(errorGSO(epoch)==0)
+    %    break;
+    %end
 end
 
 
@@ -198,6 +200,3 @@ end
 galaxy_x = fminsearch(f,galaxy_x);
 
 best_cost = f(galaxy_x);
-
-
-

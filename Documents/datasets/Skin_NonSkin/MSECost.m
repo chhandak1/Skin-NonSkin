@@ -6,4 +6,3 @@ g1=tansig(double(xtrain*thetaPso1));
 g2=tansig(g1*thetaPso2);
 n=size(ytrain,1);
 error=sum((g2-ytrain).^2)/n;
-

@@ -1,21 +1,21 @@
 
-%X=load('Skin_NonSkin.txt');
+X=load('CaucasianNonCaucasianData.txt');
 x1=skinColor(:,1:3);
 x = [ones(size(x1,1),1) x1];   %Adding Bias value
-y=skinColor(:,4:6);   
+y=skinColor(:,4);   
 
 m=size(x,1);
 n=size(x,2);
-[xtrain,ytrain,xtest,ytest]=trainTestMultivariate(x,y,m,n);
+[xtrain,ytrain,xtest,ytest]=trainTestSplit(x,y,m,n);
 neurons=8;
 outIters=1;
 sumSuccess=0;
 max=0;
 %cost=@(x)sum(x.^2);
 %[x_optimal,cost_optimal] = nmgso(cost,59);
-[theta, cost] = ...
-	nmgso(@(t)(costFunction(t, x, y)), 59);
-%{
+%[theta, cost] = ...
+%	nmgso(@(t)(costFunction(t, x, y)), 59);
+
 for j=1:outIters
     
     theta1=-1+2*rand(4,neurons);
@@ -37,5 +37,5 @@ for j=1:outIters
     [g2test,h,success]=testfuncMulti(theta1,theta2,xtest,ytest);
 
 end
-%}
+
     

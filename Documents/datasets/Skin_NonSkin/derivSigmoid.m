@@ -1,5 +1,5 @@
 function [deriv]=derivSigmoid(x)
 
-deriv=1-(x.*x);
+deriv=x.*(1-x);
 
 end

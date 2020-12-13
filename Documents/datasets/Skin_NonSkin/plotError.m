@@ -1,0 +1,12 @@
+errorGSO=load('errorGSO.txt');
+errorPSO=load('errorPSO.txt');
+errorBP=load('errorBP.txt');
+plot(errorBP(1:100),'-','LineWidth',2);
+hold on;
+plot(errorPSO(1:100),':','LineWidth',2);
+hold on;
+plot(errorGSO,'--','LineWidth',2);
+hold on;
+xlabel('Number of Iterations');
+ylabel('Mean Squared Error');
+legend('Backpropagation','PSO','GSO');

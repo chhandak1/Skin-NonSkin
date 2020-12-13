@@ -1,22 +1,4 @@
-%
-% Copyright (c) 2015, Yarpiz (www.yarpiz.com)
-% All rights reserved. Please read the "license.txt" for license terms.
-%
-% Project Code: YPEA102
-% Project Title: Implementation of Particle Swarm Optimization in MATLAB
-% Publisher: Yarpiz (www.yarpiz.com)
-% 
-% Developer: S. Mostapha Kalami Heris (Member of Yarpiz Team)
-% 
-% Contact Info: sm.kalami@gmail.com, info@yarpiz.com
-%
-
-%clc;
-%clear;
-%close all;
-
-%% Problem Definition
-function GlobalBest=pso(thetaPso,xtrain,ytrain)
+function [GlobalBest,errorPSO]=pso(thetaPso,xtrain,ytrain)
 
 CostFunction=@(thetaPso) MSECost(thetaPso,xtrain,ytrain);        % Cost Function
 %CostFunction=@(x) sum(x.^2);
@@ -144,7 +126,7 @@ for it=1:MaxIt
     
     BestCost(it)=GlobalBest.Cost;
     errorPSO(it)=BestCost(it);
-    %disp(['Iteration ' num2str(it) ': Best Cost = ' num2str(BestCost(it))]);
+    disp(['Iteration ' num2str(it) ': Best Cost = ' num2str(BestCost(it))]);
     
     w=w*wdamp;
     

@@ -6,7 +6,7 @@ clc
 FDetect = vision.CascadeObjectDetector;
 
 %Read the input image
-I = imread('skinCheck12.jpg');
+I = imread('skinCheck9.jpg');
 
 %Returns Bounding Box values based on number of objects
 BB = step(FDetect,I);
@@ -21,7 +21,7 @@ for i=1:size(BB,1)
     for j=BB(i,1):BB(i,1)+BB(i,3)
         for j=BB(i,2):BB(i,2)+BB(i,4)
             face(i)
-%}
+
 theta1=load('theta1.txt');
 theta2=load('theta2.txt');
 for i=1:size(BB,1)
@@ -30,6 +30,6 @@ for i=1:size(BB,1)
     figure,imshow(face);
     skinNonSkinInference(face,theta1,theta2);
 end
-
+%}
 %title('Face Detection');
 hold off;

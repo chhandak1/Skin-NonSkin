@@ -1,17 +1,19 @@
-function ethnicity=checkEthnicity(final,theta1,theta2)
-data=imread('skinCheck11.jpg');
-figure,imshow(data);
+function ethnicity=checkEthnicity(final,data)
+theta1=load('thetaEthnicity1.txt');
+theta2=load('thetaEthnicity2.txt');
+%[data,map]=imread('skinCheck11.jpg');
+%figure,imshow(data);
 ethnicity=zeros(size(data));
 for i=1:size(data,1)
     for j=1:size(data,2)
-        if(final(i,j)==0)
+        if(final(i,j)==1)
             r=data(i,j,1);
             g=data(i,j,2);
             b=data(i,j,3);
 
-            xtest=double([1 r g b]);
-            g1=sigmoid(double(xtest*theta1));
-            g2=sigmoid(g1*theta2);
+            xtest=double([r g b]);
+            g1=tansig(double(xtest*theta1));
+            g2=tansig(g1*theta2);
             if g2>0
                 ethnicity(i,j,:)=1;
                 %{

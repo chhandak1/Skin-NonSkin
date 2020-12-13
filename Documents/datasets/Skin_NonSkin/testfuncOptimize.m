@@ -14,4 +14,3 @@ posMatch=find(ytest==h);
 count=size(posMatch,1);
 success=count/size(ytest,1)*100;
 fprintf('Success ratio:%f\n',success);
-
